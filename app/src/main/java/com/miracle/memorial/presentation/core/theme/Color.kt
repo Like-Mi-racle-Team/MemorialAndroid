@@ -9,6 +9,7 @@ object MColor {
     val SubTitle = Color(0xFFA3A3A3)
     val TestImage = Color(0xFFD9D9D9)
     val Background = Color(0xFFFFFFFF)
+    val PointColor = Color(0xFFFC863D)
 }
 
 val Purple80 = Color(0xFFD0BCFF)

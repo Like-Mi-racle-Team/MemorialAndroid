@@ -29,6 +29,12 @@
             android:label="@string/app_name"
             android:theme="@style/Theme.Memorial">
         </activity>
+        <activity
+            android:name=".presentation.feature.start.StartActivity"
+            android:exported="false"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Memorial">
+        </activity>
     </application>
 
 </manifest>

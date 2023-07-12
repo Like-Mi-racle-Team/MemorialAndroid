@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.miracle.memorial.presentation.core.theme.MemorialTheme
@@ -24,9 +26,11 @@ class SplashActivity : ComponentActivity() {
         lifecycleScope.launchWhenCreated {
             delay(3000)
 
-            val intent = Intent(this@SplashActivity, MainActivity::class.java)
+            val intent = Intent(this@SplashActivity, StartActivity::class.java)
             startActivity(intent)
             finish()
         }
     }
 }
+
+
