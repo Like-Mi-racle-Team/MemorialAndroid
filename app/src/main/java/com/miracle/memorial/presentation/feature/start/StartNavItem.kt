@@ -6,4 +6,5 @@ object StartNavItem {
     const val signup_second = "signup_second"
     const val signup_third = "signup_third"
     const val start = "start"
+    const val main = "main"
 }

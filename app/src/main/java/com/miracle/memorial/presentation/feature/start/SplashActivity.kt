@@ -10,9 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
-import com.miracle.memorial.presentation.core.theme.MemorialTheme
-import com.miracle.memorial.presentation.root.MainActivity
-import com.miracle.memorial.presentation.root.MainScreen
 import kotlinx.coroutines.delay
 
 @ExperimentalMaterial3Api

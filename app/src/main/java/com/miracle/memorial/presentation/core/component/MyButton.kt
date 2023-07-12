@@ -18,7 +18,7 @@ import com.miracle.memorial.presentation.feature.start.StartNavItem
 fun MyButton(onClick: () -> Unit, text: String) {
     Button(
         shape = RoundedCornerShape(10.dp),
-        onClick = { onClick },
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
             .height(45.dp)

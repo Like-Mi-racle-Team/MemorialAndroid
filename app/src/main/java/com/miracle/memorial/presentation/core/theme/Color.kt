@@ -10,6 +10,7 @@ object MColor {
     val TestImage = Color(0xFFD9D9D9)
     val Background = Color(0xFFFFFFFF)
     val PointColor = Color(0xFFFC863D)
+    val Warning = Color(0xFFFF3F3F)
 }
 
 val Purple80 = Color(0xFFD0BCFF)

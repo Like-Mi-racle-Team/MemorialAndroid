@@ -13,6 +13,7 @@ import com.miracle.memorial.presentation.feature.login.LoginScreen
 import com.miracle.memorial.presentation.feature.signup.SignupFirstScreen
 import com.miracle.memorial.presentation.feature.signup.SignupSecondScreen
 import com.miracle.memorial.presentation.feature.signup.SignupThirdScreen
+import com.miracle.memorial.presentation.root.MainScreen
 
 @ExperimentalMaterial3Api
 @Composable
@@ -33,7 +34,9 @@ fun StartNavGraph(navController: NavHostController) {
         composable(StartNavItem.login) {
             LoginScreen(navController)
         }
-
+        composable(StartNavItem.main) {
+            MainScreen()
+        }
     }
 
 }
