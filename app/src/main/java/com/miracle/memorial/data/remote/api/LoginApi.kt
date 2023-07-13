@@ -9,14 +9,13 @@ import retrofit2.http.Field
 import retrofit2.http.POST
 
 interface LoginApi {
-
-    @POST("auth/login")
     suspend fun login(
         @Body loginRequest: LoginRequest
     ): Response<LoginResponse>
 
-    @POST("auth/join")
+    @POST("api/auth/join")
     suspend fun join(
         @Body joinRequest: JoinRequest
     ): Response<Unit>
+
 }

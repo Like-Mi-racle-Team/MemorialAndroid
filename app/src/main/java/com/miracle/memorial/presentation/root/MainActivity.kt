@@ -20,7 +20,9 @@ import com.miracle.memorial.presentation.core.component.MyTopBar
 import com.miracle.memorial.presentation.core.component.bottomnavigation.BottomNavBar
 import com.miracle.memorial.presentation.core.component.bottomnavigation.BottomNavGraph
 import com.miracle.memorial.presentation.core.theme.MemorialTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 @ExperimentalMaterial3Api
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import com.miracle.memorial.R
 import com.miracle.memorial.presentation.core.theme.MColor
 import com.miracle.memorial.presentation.core.theme.MemorialTheme
+import com.miracle.memorial.presentation.feature.profle.PostList.PostListScreen
 
 @OptIn(ExperimentalFoundationApi::class)
 @ExperimentalMaterial3Api
@@ -82,7 +83,7 @@ fun ProfileScreen() {
                     )
                     Spacer(modifier = Modifier.width(5.dp))
                     Text(
-                        text = "?개",
+                        text = "3개",
                         color = MColor.Text,
                         style = MaterialTheme.typography.bodySmall
                     )
@@ -96,13 +97,13 @@ fun ProfileScreen() {
                     .background(MColor.TestImage)
             )
         }
-        Spacer(modifier = Modifier.height(15.dp))
-        Text(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            text = "안녕하세요, 조승완입니다.",
-            color = MColor.Text,
-            style = MaterialTheme.typography.bodyMedium
-        )
+//        Spacer(modifier = Modifier.height(15.dp))
+//        Text(
+//            modifier = Modifier.padding(horizontal = 16.dp),
+//            text = "안녕하세요, 조승완입니다.",
+//            color = MColor.Text,
+//            style = MaterialTheme.typography.bodyMedium
+//        )
         Spacer(modifier = Modifier.height(20.dp))
 
         var state by remember { mutableStateOf(0) }
@@ -143,10 +144,10 @@ fun ProfileScreen() {
                 )
             }
         }
-//        when (state) {
-//            0 -> null
+        when (state) {
+            0 -> PostListScreen()
 //            1 -> null
-//        }
+        }
     }
 }
 

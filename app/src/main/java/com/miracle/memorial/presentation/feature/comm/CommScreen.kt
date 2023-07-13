@@ -1,8 +1,10 @@
 package com.miracle.memorial.presentation.feature
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,6 +15,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -24,13 +28,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.miracle.memorial.R
 import com.miracle.memorial.presentation.core.theme.MColor
 import com.miracle.memorial.presentation.core.theme.MemorialTheme
+import com.miracle.memorial.presentation.feature.Home.HappyBox
+import com.miracle.memorial.presentation.feature.Home.Happys
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @ExperimentalMaterial3Api
@@ -49,10 +57,24 @@ fun CommScreen() {
             style = MaterialTheme.typography.titleMedium
         )
         Spacer(modifier = Modifier.height(30.dp))
-        CommContent(writer = "stev3j", createdTime = "6월 9일", content = "어쩌구저쩌구")
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(20.dp),
+        ) {
+            items(CommContents) { content ->
+                CommContent(writer = content.writer, createdTime = content.createdTime, content = content.content, id = content.image)
+            }
+        }
+        Spacer(modifier = Modifier.height(160.dp))
     }
 }
 
+data class Content(val writer: String, val createdTime: String, val content: String, val image: Int)
+
+val CommContents = listOf(
+    Content("jsw613", "3분 전", "어쩌구저쩌구", R.drawable.img_1),
+    Content("jsw613", "10분 전", "어쩌구저쩌구", R.drawable.img_2),
+    Content("jsw613", "12분 전", "어쩌구저쩌구", R.drawable.img_3),
+)
 
 @Composable
 fun CommContent(
@@ -61,12 +83,13 @@ fun CommContent(
     createdTime: String,
 //    images: List<Int>,
     content: String,
-//    comments: List<Comments>
+    id: Int
 ) {
     Surface(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(20.dp),
-        color = MColor.Container
+        color = MColor.Background,
+        border = BorderStroke(1.dp, MColor.Container),
     ) {
         Column {
             Row(
@@ -98,6 +121,11 @@ fun CommContent(
                     .fillMaxWidth()
                     .height(360.dp)
                     .background(MColor.TestImage)
+                    .clip(RoundedCornerShape(20.dp))
+                    .paint(
+                        painterResource(id = id),
+                        contentScale = ContentScale.FillBounds
+                    ),
             )
             Spacer(modifier = Modifier.height(10.dp))
             Row {
@@ -152,6 +180,6 @@ fun CommScreenPreview() {
 @Composable
 fun CommContentPreview() {
     MemorialTheme() {
-        CommContent(writer = "stev3j", createdTime = "6월 9일", content = "어쩌구저쩌구")
+        CommContent(writer = "stev3j", createdTime = "6월 9일", content = "어쩌구저쩌구", R.drawable.img_3)
     }
 }

@@ -1,5 +1,6 @@
 package com.miracle.memorial.presentation.feature.login
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -23,6 +24,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -31,20 +33,29 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.miracle.memorial.R
+import com.miracle.memorial.domain.model.LoginDto
 import com.miracle.memorial.presentation.core.component.MyButton
 import com.miracle.memorial.presentation.core.theme.MColor
 import com.miracle.memorial.presentation.core.theme.MemorialTheme
 import com.miracle.memorial.presentation.core.theme.Pretendard
+import com.miracle.memorial.presentation.feature.start.StartActivity
 import com.miracle.memorial.presentation.feature.start.StartNavItem
 import com.miracle.memorial.presentation.feature.start.StartScreen
+import dagger.hilt.android.AndroidEntryPoint
 
 @ExperimentalMaterial3Api
 @Composable
-fun LoginScreen(navController: NavController) {
-    var isPwdNotSame by rememberSaveable { mutableStateOf(false) }
+fun LoginScreen(
+    navController: NavController,
+    loginViewModel: LoginViewModel = hiltViewModel(),
+) {
+    var idPwdNotSame by rememberSaveable { mutableStateOf(false) }
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -151,22 +162,21 @@ fun LoginScreen(navController: NavController) {
                 color = MColor.HintText,
                 style = MaterialTheme.typography.labelMedium,
             )
-            if (isPwdNotSame) {
-                Text(
-                    text = "아이디 또는 비밀번호를 확인해주세요!",
-                    color = MColor.Warning,
-                    style = MaterialTheme.typography.labelMedium
-                )
+            if (idPwdNotSame) {
+                Toast.makeText(context, "아이디 또는 비밀번호를 확인해주세요!", Toast.LENGTH_SHORT).show()
             }
         }
 
-
         Spacer(modifier = Modifier.weight(1f))
         MyButton(onClick = {
-            if (id == id && pwd == pwd) {
+//            loginViewModel.login(LoginDto(userId = id, userPassword = pwd, userName = null, userIntroduce = null))
+
+            if (id == "jsw613" && pwd == "jsw613") {
+                Toast.makeText(context, "jsw613님 안녕하세요!", Toast.LENGTH_SHORT).show()
                 navController.navigate(StartNavItem.main)
             } else {
-                isPwdNotSame = true
+
+                idPwdNotSame = true
             }
         }, text = "메모리얼 시작하기")
         Spacer(modifier = Modifier.height(24.dp))

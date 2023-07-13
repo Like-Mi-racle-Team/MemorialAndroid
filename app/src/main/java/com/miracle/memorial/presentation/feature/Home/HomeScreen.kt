@@ -8,6 +8,7 @@ import android.os.Build
 import android.provider.MediaStore
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -35,11 +36,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.miracle.memorial.R
 import com.miracle.memorial.presentation.core.theme.MColor
 import com.miracle.memorial.presentation.core.theme.MemorialTheme
 
@@ -54,7 +60,7 @@ fun HomeScreen() {
     ) {
         Spacer(modifier = Modifier.height(65.dp))
         Text(
-            text = "stev3j님의\n행복한 순간들",
+            text = "jsw613님의\n행복한 순간들",
             color = Color.Black,
             style = MaterialTheme.typography.titleMedium
         )
@@ -62,46 +68,49 @@ fun HomeScreen() {
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(20.dp),
         ) {
-            items(days) { day ->
+            items(Happys) { happy ->
                 Row {
-                    HappyBox(day)
+                    HappyBox(happy)
                 }
             }
         }
-        Spacer(modifier = Modifier.height(80.dp))
+        Spacer(modifier = Modifier.height(160.dp))
     }
 }
 
-data class Day(val day: String, val year: String)
+data class Happy(val day: String, val year: String, val id: Int)
 
-val days = listOf(
-    Day("6월 9일", "2023년"),
-    Day("6월 10일", "2023년"),
-    Day("6월 11일", "2023년"),
+val Happys = listOf(
+    Happy("6월 9일", "2023년", R.drawable.img_1),
+    Happy("6월 10일", "2023년", R.drawable.img_2),
+    Happy("6월 11일", "2023년", R.drawable.img_3),
 )
 
 @Composable
 fun HappyBox(
-    day: Day
+    happy: Happy,
 ) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .height(360.dp),
-        shape = RoundedCornerShape(20.dp),
-        color = MColor.Container
+            .height(360.dp)
+            .clip(RoundedCornerShape(20.dp))
+            .paint(
+                painterResource(id = happy.id),
+                contentScale = ContentScale.FillBounds),
+        color = Color.Transparent
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.weight(1f))
             Text(
-                text = day.day,
+                text = happy.day,
                 color = Color.White,
                 style = MaterialTheme.typography.titleLarge
             )
             Text(
-                text = day.year,
+                text = happy.year,
                 color = Color.White,
                 style = MaterialTheme.typography.titleSmall
             )
@@ -123,7 +132,7 @@ fun HomeScreenPreview() {
 @Composable
 fun HappyBoxPreview() {
     MemorialTheme() {
-        HappyBox(day = Day("6월 9일", "2023년"))
+        HappyBox(happy = Happy("6월 9일", "2023년", R.drawable.img_1))
     }
 }
 

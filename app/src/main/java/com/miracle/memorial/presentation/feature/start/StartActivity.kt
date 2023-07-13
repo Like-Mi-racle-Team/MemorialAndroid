@@ -1,6 +1,7 @@
 package com.miracle.memorial.presentation.feature.start
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
@@ -47,6 +48,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.miracle.memorial.R
@@ -56,13 +59,22 @@ import com.miracle.memorial.presentation.core.component.bottomnavigation.BottomN
 import com.miracle.memorial.presentation.core.component.bottomnavigation.BottomNavGraph
 import com.miracle.memorial.presentation.core.theme.MColor
 import com.miracle.memorial.presentation.core.theme.MemorialTheme
+import com.miracle.memorial.presentation.root.MainActivity
 import com.miracle.memorial.presentation.root.MainScreen
+import com.miracle.memorial.presentation.utils.MemorialApp
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 @ExperimentalMaterial3Api
 class StartActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            if (MemorialApp.prefs.accessToken.isEmpty().not()) {
+                val intent = Intent(this@StartActivity, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
             MemorialTheme {
                 StartScreens()
 //                LoadImagePermission()
@@ -75,13 +87,8 @@ class StartActivity : ComponentActivity() {
 @ExperimentalMaterial3Api
 @Composable
 fun StartScreens() {
-    /* 만약 로그인 토큰이 만료되었다면 */
     val navController = rememberNavController()
-
     StartNavGraph(navController = navController)
-
-    /* 토큰을 가지고 있다면 */
-    
 }
 
 @Composable

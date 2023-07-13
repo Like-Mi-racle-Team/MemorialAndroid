@@ -1,5 +1,6 @@
 package com.miracle.memorial.presentation.feature.signup
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -24,6 +25,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -41,6 +43,7 @@ import com.miracle.memorial.presentation.core.theme.MemorialTheme
 import com.miracle.memorial.presentation.core.theme.Pretendard
 import com.miracle.memorial.presentation.feature.start.StartNavItem
 import com.miracle.memorial.presentation.feature.start.StartScreen
+import dagger.hilt.android.qualifiers.ApplicationContext
 
 
 @ExperimentalMaterial3Api
@@ -315,9 +318,12 @@ fun SignupThirdScreen(navController: NavController) {
             )
         }
 
+        val context = LocalContext.current
+
         Spacer(modifier = Modifier.weight(1f))
         MyButton(onClick = {
             /* 서버로 SignupDto 전달해 주면서 */
+            Toast.makeText(context, "jsw613님 안녕하세요!", Toast.LENGTH_SHORT).show()
             navController.navigate(StartNavItem.main)
                            }, text = "메모리얼 시작하기")
         Spacer(modifier = Modifier.height(24.dp))
